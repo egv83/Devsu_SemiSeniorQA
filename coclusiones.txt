@@ -1,0 +1,65 @@
+---------------------------------------
+HALLAZGOS Y CONCLUCIONES DEL EJECICIO
+---------------------------------------
+
+1. RESUMEN DEL STACK TECNOLÓGICO EN TEST DE AUTOMATIZACIÓN E2E
+Para realizar la prueba de automatización se desarrollo utilizando
+* Lenguaje de programación: JAVA version 21
+* Automatizacion de interfaz de usuario (UI): Serenity BDD + Cucumber.
+* Automatizacion de Servicios (API REST): Karate.
+* Test suit: Junit 5
+* Estrucutra de casos de pruebas: Basado en Gherkin
+* Gestor de dependencias: Maven
+
+2. CONCLUCIONES TÉCNICAS Y ARQUITECTURA
+***************************************************************************************
+AUTOMATIZACIÓN WEB (UI)
+* Arquitectura Orientada a Negocio: La integración de Serenity BDD con Cucumber 
+  desacopla las especificaciones de comportamiento (Gherkin) de la lógica técnica 
+  en Java, facilitando la legibilidad técnica y el mantenimiento escalable.
+
+* Control Avanzado del Navegador: La inyección de capacidades específicas en Chrome 
+  (`prefs`) permitió neutralizar las alertas nativas del sistema sobre gestión de 
+  contraseñas, mitigando pruebas intermitentes ("flaky tests") sin alterar el DOM.
+
+* Optimización de Ejecución: La implementación de la Suite con JUnit 5 eliminó 
+  los errores de descubrimiento de recursos en el Classpath, logrando un ciclo de 
+  vida estable al ejecutar comandos de consola.
+
+AUTOMATIZACIÓN DE SERVICIOS (API REST)
+• Validación de Contratos de Datos: El uso de Karate DSL facilitó aserciones 
+  semánticas directas (`match`) sobre respuestas JSON complejas, protegiendo la suite 
+  contra alteraciones inesperadas en la estructura o tipos de datos del API.
+
+• Orquestación de Flujo Continuo: Se logró encadenar el comportamiento de la API
+  dentro de un único archivo de escenarios, garantizando que cada petición HTTP 
+  (POST/GET) dependa lógicamente del estado previo del recurso simulado.
+
+3. HALLAZGOS Y RECOMENDACIONES
+***************************************************************************************
+AUTOMATIZACIÓN WEB (UI)
+• Hallazgo - Gestión de Excepciones: El módulo de autenticación respondió de manera 
+  íntegra ante estímulos negativos (credenciales incorrectas y campos vacíos). La 
+  interfaz denegó los accesos mostrando las alertas esperadas sin quiebres de sesión.
+
+• Recomendación: Se detectó que la página web procesa los envíos con campos en blanco 
+  directamente hacia el servidor. Se aconseja incorporar validaciones rápidas en el 
+  front-end (HTML5/JavaScript) para evitar tráfico y consumo innecesario de recursos.
+
+AUTOMATIZACIÓN DE SERVICIOS (API REST)
+• Hallazgo - Consistencia de Datos: Las pruebas sobre la API "Petstore Swagger" 
+  confirmaron una consistencia transaccional del 100%. Las modificaciones parciales 
+  enviadas por Form Data (POST) impactaron la base de datos de manera inmediata.
+
+• Recomendación: 
+  1. Falta de Paginación: Se evidenció que el endpoint de consulta por estado 
+     (`/pet/findByStatus`) retorna un volumen masivo de registros en un solo payload JSON. 
+     Se recomienda encarecidamente implementar parámetros de paginación (`page`, `size` o `limit`) 
+     en el backend para evitar la degradación del rendimiento de la red y mitigar posibles 
+     problemas de desbordamiento de memoria (Out of Memory) tanto en el servidor como en los clientes.
+
+  2. Duplicidad de Registros en finfByStatus: Se detectó la existencia de múltiples objetos idénticos y duplicados 
+     dentro del arreglo de la respuesta HTTP devuelto específicamente por el endpoint `/pet/findByStatus`. 
+     Es necesario revisar los procesos de inserción y las restricciones de unicidad en la base de datos, 
+     o en su defecto, aplicar filtros de limpieza en las consultas del microservicio 
+     para garantizar la integridad de la información entregada.
