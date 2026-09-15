@@ -20,10 +20,11 @@
 /Automatización Test/
 /////////////////////
 1- Nos diriginos hasta la carpeta automatizacionE2E, aqui esta el archivo pom.
+
 2- Ejecutamos los siguientes comandos
-    1. mvn clean install  para instalar la dependencias
-    2. mvn clean compile  para compilar el proyecto
-    3. mvn clean verify  para ejecutar el test realizando una limpieza previa
+    1. Para instalar la dependencias: mvn clean install
+    2. Para compilar el proyecto: mvn clean compile
+    3. Para ejecutar el test realizando una limpieza previa: mvn clean verify
     4. opcional si se quiere ejecutar el test especifico: mvn clean verify "-Dcucumber.filter.tags=@Comprar
 
 3- Para visualizar el reporte del test se puede realizar de dos formas
@@ -36,11 +37,16 @@
 //////////
 /API Test/
 //////////
-1- Nos diriginos hasta la carpeta ApiTest, aqui esta el archivo pom.
+1- Nos diriginos hasta la carpeta ApiTest.
+   por ejemplo si nos encontramos en la ruta: c:/proyectos/Devsu_SemiSeniorQA/automatizacionE2E
+   regresamos a c:/proyectos/Devsu_SemiSeniorQA/ y liego ingresamos a la carpeta ApiTest
+   aqui esta el archivo pom.
+
 2- Ejecutamos los siguientes comandos
-    1. mvn clean install  para instalar la dependencias
-    2. mvn clean compile  para compilar el proyecto
-    3. para ejecutar el test se usa el comando mvn clean test
+    1. Para instalar la dependencias: mvn clean install
+    2. Para compilar el proyecto: mvn clean compile
+    3. Para ejecutar el test realizando una limpieza previa: mvn clean verify
+
 Para visualizar el reporte del test se puede realizar de dos formas
     1. ir a la carpeta target del proyecto tomando en cuenta esta ruta
         /target/karate-reports/karate-summary.html
