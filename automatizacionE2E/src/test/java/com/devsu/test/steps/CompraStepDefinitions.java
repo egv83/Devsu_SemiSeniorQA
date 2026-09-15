@@ -14,29 +14,12 @@ import org.junit.jupiter.api.Assertions;
 
 public class CompraStepDefinitions {
 
-    @Steps(shared = true)
-    WebSite webSite;
-
-    @Steps(shared = true)
-    LoginActions loginActions;
 
     @Steps(shared = true)
     CarActions carActions;
 
     @Steps(shared = true)
     ValidationActions validationActions;
-
-    @Dado("el usuario navega al sitio web {string}")
-    public void el_usuario_navega_al_sitio_web(String url) {
-        webSite.navigateTo(url);
-    }
-
-    @Cuando("ingresa credenciales usuario {string}, clave {string} y da click en {string}")
-    public void ingresa_credenciales_clave_y_da_click_en(String user, String password, String button) {
-        loginActions.inputUserName(user);
-        loginActions.inputPassword(password);
-        loginActions.clickLogin(button);
-    }
 
     @Dado("agrega {string} productos al carrito")
     public void agrega_dos_productos_al_carrito(String cantidad) {

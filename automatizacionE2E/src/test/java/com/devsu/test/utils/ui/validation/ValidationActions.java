@@ -12,4 +12,8 @@ public class ValidationActions {
         return validationPage.lblProduct.isDisplayed();
     }
 
+    @Step("Obtener mensaje de error")
+    public String getErrorMessage(){
+        return validationPage.getErrorMessage();
+    }
 }

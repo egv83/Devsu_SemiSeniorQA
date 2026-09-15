@@ -10,8 +10,8 @@ public class ValidationPage extends PageObject {
     @FindBy(xpath = "//div/span[@class='title']")
     public WebElementFacade lblProduct;
 
-//    @FindBy(xpath = "//h2[@class='complete-header']")
-//    public WebElementFacade messageLabel;
-
+    public String getErrorMessage(){
+        return find(By.xpath("//div[@class='error-message-container error']/h3")).getText();
+    }
 
 }
