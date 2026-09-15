@@ -58,3 +58,13 @@ Feature: Prueba de API con karate
       Then status 200
       And match response.name == 'Peluza Vallejo'
       And match response.status == 'sold'
+
+    Scenario: Consultar una mascora por un id no existente
+      Given path 'pet', 9999999
+      When method get
+      Then status 404
+
+    Scenario: Consultar una mascora por id obteniendo error 400
+      Given path 'pet', 'dddd'
+      When method get
+      Then status 400
